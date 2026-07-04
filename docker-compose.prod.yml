@@ -3,6 +3,9 @@ services:
     image: nginx:1.27-alpine
     ports:
       - "82:82"
+    networks:
+      - default
+      - kodvs-network
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -31,7 +34,7 @@ services:
       db: { condition: service_healthy }
     environment:
       GOTRUE_DB_DRIVER: postgres
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD_ENCODED}@db:5432/postgres
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/postgres
       GOTRUE_SITE_URL: https://aprova.kodoo.online
       GOTRUE_JWT_SECRET: ${GOTRUE_JWT_SECRET}
       GOTRUE_API_HOST: 0.0.0.0
@@ -54,7 +57,7 @@ services:
       db: { condition: service_healthy }
       auth: { condition: service_started }
     environment:
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD_ENCODED}@db:5432/aprova_mais
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/aprova_mais
       SUPABASE_URL: http://auth:9999
       SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
       NEXT_PUBLIC_SUPABASE_URL: https://aprova.kodoo.online
@@ -64,6 +67,10 @@ services:
       SUPABASE_ADMIN_IDS: ${SUPABASE_ADMIN_IDS:-""}
       NEXT_TELEMETRY_DISABLED: "1"
     restart: unless-stopped
+
+networks:
+  kodvs-network:
+    external: true
 
 volumes:
   pgdata:

@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/auth/v1/:path*",
+        destination: `${process.env.SUPABASE_URL || "http://auth:9999"}/:path*`,
+      },
+      {
         source: "/api/auth/:path*",
         destination: `${process.env.SUPABASE_URL || "http://auth:9999"}/:path*`,
       },
