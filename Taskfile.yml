@@ -1,0 +1,124 @@
+version: "3"
+
+vars:
+  COMPOSE_PROD: -f docker-compose.prod.yml
+
+tasks:
+
+  # ─── Desenvolvimento ────────────────────────────────────
+
+  dev:
+    desc: Sobe stack de desenvolvimento
+    cmds:
+      - docker compose up -d
+
+  dev-down:
+    desc: Derruba stack de desenvolvimento
+    cmds:
+      - docker compose down
+
+  dev-logs:
+    desc: Logs da stack de desenvolvimento
+    cmds:
+      - docker compose logs -f
+
+  setup:
+    desc: Setup inicial do ambiente dev
+    cmds:
+      - bash scripts/setup.sh
+
+  db-push:
+    desc: Push do schema Drizzle
+    cmds:
+      - docker compose exec app npx drizzle-kit push
+
+  db-seed:
+    desc: Seed dos dados de teste
+    cmds:
+      - docker compose exec app npx tsx ./scripts/prod.ts
+
+  db-studio:
+    desc: Abre Drizzle Studio
+    cmds:
+      - docker compose exec app npx drizzle-kit studio
+
+  # ─── Produção ───────────────────────────────────────────
+
+  prod-tunnel-logs:
+    desc: Logs apenas do tunnel Cloudflare
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} logs -f tunnel
+
+  deploy:
+    desc: Deploy completo para produção
+    cmds:
+      - bash scripts/deploy.sh
+
+  prod-build:
+    desc: Build da imagem da aplicação
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} build app
+
+  prod-up:
+    desc: Sobe stack de produção
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} up -d
+
+  prod-down:
+    desc: Derruba stack de produção
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} down
+
+  prod-logs:
+    desc: Logs da stack de produção
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} logs -f
+
+  prod-rebuild:
+    desc: Rebuild e restart da stack de produção
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} up -d --build
+
+  prod-db:
+    desc: Acessa o banco de produção via psql
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} exec db psql -U postgres -d aprova_mais
+
+  prod-seed:
+    desc: Executa seed no banco de produção
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} exec app npx tsx ./scripts/prod.ts
+
+  prod-shell:
+    desc: Shell no container app de produção
+    cmds:
+      - docker compose {{.COMPOSE_PROD}} exec app sh
+
+  # ─── Qualidade ──────────────────────────────────────────
+
+  lint:
+    desc: Verifica lint
+    cmds:
+      - npm run lint
+
+  lint-fix:
+    desc: Corrige lint automaticamente
+    cmds:
+      - npm run lint:fix
+
+  format:
+    desc: Verifica formatação
+    cmds:
+      - npm run format
+
+  format-fix:
+    desc: Formata arquivos
+    cmds:
+      - npm run format:fix
+
+  # ─── Utilitários ────────────────────────────────────────
+
+  default:
+    desc: Lista todos os comandos disponíveis
+    cmds:
+      - task --list
