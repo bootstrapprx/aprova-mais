@@ -35,7 +35,7 @@ const SignInPage = () => {
 
   return (
     <div className="mx-auto flex w-full max-w-sm flex-col gap-y-6">
-      <h1 className="text-center text-2xl font-bold text-neutral-800">
+      <h1 className="text-center text-2xl font-bold text-foreground">
         Entrar
       </h1>
 
@@ -46,7 +46,7 @@ const SignInPage = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="rounded-lg border-2 border-neutral-300 p-3 text-neutral-700 outline-none focus:border-green-500"
+          className="rounded-lg border-2 border-border bg-background p-3 text-foreground outline-none focus:border-green-500 dark:focus:border-green-400"
         />
 
         <input
@@ -55,7 +55,7 @@ const SignInPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="rounded-lg border-2 border-neutral-300 p-3 text-neutral-700 outline-none focus:border-green-500"
+          className="rounded-lg border-2 border-border bg-background p-3 text-foreground outline-none focus:border-green-500 dark:focus:border-green-400"
         />
 
         {error && (
@@ -73,9 +73,9 @@ const SignInPage = () => {
         </Button>
       </form>
 
-      <p className="text-center text-sm text-neutral-500">
+      <p className="text-center text-sm text-muted-foreground">
         Não tem conta?{" "}
-        <Link href="/sign-up" className="font-bold text-green-600 hover:underline">
+        <Link href="/sign-up" className="font-bold text-green-600 hover:underline dark:text-green-400">
           Cadastre-se
         </Link>
       </p>

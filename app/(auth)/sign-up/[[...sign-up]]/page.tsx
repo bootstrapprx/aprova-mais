@@ -39,7 +39,7 @@ const SignUpPage = () => {
 
   return (
     <div className="mx-auto flex w-full max-w-sm flex-col gap-y-6">
-      <h1 className="text-center text-2xl font-bold text-neutral-800">
+      <h1 className="text-center text-2xl font-bold text-foreground">
         Criar conta
       </h1>
 
@@ -50,7 +50,7 @@ const SignUpPage = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="rounded-lg border-2 border-neutral-300 p-3 text-neutral-700 outline-none focus:border-green-500"
+          className="rounded-lg border-2 border-border bg-background p-3 text-foreground outline-none focus:border-green-500 dark:focus:border-green-400"
         />
 
         <input
@@ -59,7 +59,7 @@ const SignUpPage = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="rounded-lg border-2 border-neutral-300 p-3 text-neutral-700 outline-none focus:border-green-500"
+          className="rounded-lg border-2 border-border bg-background p-3 text-foreground outline-none focus:border-green-500 dark:focus:border-green-400"
         />
 
         <input
@@ -68,7 +68,7 @@ const SignUpPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="rounded-lg border-2 border-neutral-300 p-3 text-neutral-700 outline-none focus:border-green-500"
+          className="rounded-lg border-2 border-border bg-background p-3 text-foreground outline-none focus:border-green-500 dark:focus:border-green-400"
         />
 
         {error && (
@@ -86,9 +86,9 @@ const SignUpPage = () => {
         </Button>
       </form>
 
-      <p className="text-center text-sm text-neutral-500">
+      <p className="text-center text-sm text-muted-foreground">
         Já tem conta?{" "}
-        <Link href="/sign-in" className="font-bold text-green-600 hover:underline">
+        <Link href="/sign-in" className="font-bold text-green-600 hover:underline dark:text-green-400">
           Entrar
         </Link>
       </p>

@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useSupabase } from "@/components/supabase-provider";
 
 import { SidebarItem } from "./sidebar-item";
+import { ThemeToggle } from "./theme-toggle";
 
 type SidebarProps = {
   className?: string;
@@ -31,7 +32,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
         <div className="flex items-center gap-x-3 pb-7 pl-4 pt-8">
           <Image src="/mascot.svg" alt="Mascot" height={40} width={40} />
 
-          <h1 className="text-2xl font-extrabold tracking-wide text-green-600">
+          <h1 className="text-2xl font-extrabold tracking-wide text-green-600 dark:text-green-400">
             Aprova+
           </h1>
         </div>
@@ -48,7 +49,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
         <SidebarItem label="Loja" href="/shop" iconSrc="/shop.svg" />
       </div>
 
-      <div className="p-4">
+      <div className="flex items-center justify-between p-4">
         {loading && (
           <Loader className="h-5 w-5 animate-spin text-muted-foreground" />
         )}
@@ -56,12 +57,14 @@ export const Sidebar = ({ className }: SidebarProps) => {
         {!loading && user && (
           <button
             onClick={handleSignOut}
-            className="flex w-full items-center gap-x-2 rounded-lg p-2 text-neutral-600 transition hover:bg-neutral-100"
+            className="flex items-center gap-x-2 rounded-lg p-2 text-muted-foreground transition hover:bg-neutral-100 dark:hover:bg-neutral-800"
           >
             <LogOut className="h-5 w-5" />
             <span className="text-sm font-medium">Sair</span>
           </button>
         )}
+
+        <ThemeToggle />
       </div>
     </div>
   );

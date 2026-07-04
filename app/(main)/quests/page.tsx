@@ -36,7 +36,7 @@ const QuestsPage = async () => {
         <div className="flex w-full flex-col items-center">
           <Image src="/quests.svg" alt="Quests" height={90} width={90} />
 
-          <h1 className="my-6 text-center text-2xl font-bold text-neutral-800">
+          <h1 className="my-6 text-center text-2xl font-bold text-foreground">
             Metas
           </h1>
           <p className="mb-6 text-center text-lg text-muted-foreground">
@@ -60,7 +60,7 @@ const QuestsPage = async () => {
                   />
 
                   <div className="flex w-full flex-col gap-y-2">
-                    <p className="text-xl font-bold text-neutral-700">
+                    <p className="text-xl font-bold text-foreground">
                       {quest.title}
                     </p>
 

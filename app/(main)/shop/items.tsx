@@ -36,10 +36,10 @@ export const Items = ({
         <Image src="/unlimited.svg" alt="Unlimited" height={60} width={60} />
 
         <div className="flex-1">
-          <p className="text-base font-bold text-neutral-700 lg:text-xl">
+          <p className="text-base font-bold text-foreground lg:text-xl">
             Aprova+ Pro
           </p>
-          <p className="text-sm text-neutral-500">Em breve</p>
+          <p className="text-sm text-muted-foreground">Em breve</p>
         </div>
 
         <Button onClick={onUpgrade} disabled={true} aria-disabled={true}>

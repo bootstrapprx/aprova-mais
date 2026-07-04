@@ -26,7 +26,7 @@ export const Header = () => {
 
       <header
         className={cn(
-          "h-20 w-full border-b-2 border-slate-200 px-4",
+          "h-20 w-full border-b-2 border-border px-4",
           !hideBanner ? "mt-20 sm:mt-16 lg:mt-10" : "mt-0"
         )}
       >
@@ -34,7 +34,7 @@ export const Header = () => {
           <Link href="/" className="flex items-center gap-x-3 pb-7 pl-4 pt-8">
             <Image src="/mascot.svg" alt="Mascot" height={40} width={40} />
 
-            <h1 className="text-2xl font-extrabold tracking-wide text-green-600">
+            <h1 className="text-2xl font-extrabold tracking-wide text-green-600 dark:text-green-400">
               Aprova+
             </h1>
           </Link>

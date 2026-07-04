@@ -49,7 +49,7 @@ const LeaderboardPage = async () => {
             width={90}
           />
 
-          <h1 className="my-6 text-center text-2xl font-bold text-neutral-800">
+          <h1 className="my-6 text-center text-2xl font-bold text-foreground">
             Ranking
           </h1>
           <p className="mb-6 text-center text-lg text-muted-foreground">
@@ -60,9 +60,9 @@ const LeaderboardPage = async () => {
           {leaderboard.map((userProgress, i) => (
             <div
               key={userProgress.userId}
-              className="flex w-full items-center rounded-xl p-2 px-4 hover:bg-gray-200/50"
+              className="flex w-full items-center rounded-xl p-2 px-4 hover:bg-gray-200/50 dark:hover:bg-neutral-800"
             >
-              <p className="mr-4 font-bold text-lime-700">{i + 1}</p>
+              <p className="mr-4 font-bold text-lime-700 dark:text-lime-400">{i + 1}</p>
 
               <Avatar className="ml-3 mr-6 h-12 w-12 border bg-green-500">
                 <AvatarImage
@@ -71,7 +71,7 @@ const LeaderboardPage = async () => {
                 />
               </Avatar>
 
-              <p className="flex-1 font-bold text-neutral-800">
+              <p className="flex-1 font-bold text-foreground">
                 {userProgress.userName}
               </p>
               <p className="text-muted-foreground">{userProgress.points} XP</p>
