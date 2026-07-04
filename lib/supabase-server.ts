@@ -10,7 +10,15 @@ export async function createServerSupabaseClient() {
 
   const cookieStore = await cookies();
 
+  const customFetch: typeof fetch = (input, init) => {
+    if (typeof input === "string") {
+      input = input.replace("/auth/v1/", "/");
+    }
+    return fetch(input, init);
+  };
+
   return createServerClient(url, key, {
+    global: { fetch: customFetch },
     // @ts-expect-error - auth.url não está no tipo público, mas é suportado internamente
     auth: { url },
     cookies: {
