@@ -39,3 +39,7 @@ next-env.d.ts
 # testing tools
 /ngrok
 /stripe
+
+# mobile (Capacitor) — gerado por `npm run mobile:init`
+/android
+/ios

@@ -1,7 +1,9 @@
 .PHONY: dev dev-down dev-logs \
         setup db-push db-seed db-studio \
         deploy prod-build prod-up prod-down prod-logs prod-rebuild prod-db prod-seed \
-        lint lint-fix format format-fix
+        lint lint-fix format format-fix \
+        mobile-init mobile-sync mobile-build-android mobile-build-ios \
+        mobile-open-android mobile-open-ios mobile-dev-android mobile-dev-ios
 
 # ─── Desenvolvimento ───────────────────────────────────────────
 
@@ -68,3 +70,35 @@ format:
 
 format-fix:
 	npm run format:fix
+
+# ─── Mobile (Capacitor) ──────────────────────────────────────────
+
+mobile-init:
+	npm run mobile:init
+
+mobile-sync:
+	npm run mobile:sync
+
+mobile-open-android:
+	npm run mobile:open:android
+
+mobile-open-ios:
+	npm run mobile:open:ios
+
+mobile-dev-android:
+	npm run mobile:dev:android
+
+mobile-dev-ios:
+	npm run mobile:dev:ios
+
+mobile-build-android:
+	bash scripts/mobile-build-android.sh debug
+
+mobile-build-android-release:
+	bash scripts/mobile-build-android.sh release
+
+mobile-build-ios:
+	bash scripts/mobile-build-ios.sh debug
+
+mobile-build-ios-release:
+	bash scripts/mobile-build-ios.sh release

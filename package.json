@@ -12,9 +12,22 @@
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
-    "db:prod": "tsx ./scripts/prod.ts"
+    "db:prod": "tsx ./scripts/prod.ts",
+    "mobile:init": "npx cap init aprova-mais com.aprova.mais && npx cap add android && npx cap add ios",
+    "mobile:sync": "npx cap sync",
+    "mobile:copy": "npx cap copy",
+    "mobile:open:android": "npx cap open android",
+    "mobile:open:ios": "npx cap open ios",
+    "mobile:build:android": "bash scripts/mobile-build-android.sh",
+    "mobile:build:ios": "bash scripts/mobile-build-ios.sh",
+    "mobile:dev:android": "CAPACITOR_SERVER_URL=http://localhost:3000 npx cap run android",
+    "mobile:dev:ios": "CAPACITOR_SERVER_URL=http://localhost:3000 npx cap run ios"
   },
   "dependencies": {
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/ios": "^8.4.1",
     "@radix-ui/react-avatar": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-progress": "^1.1.11",
