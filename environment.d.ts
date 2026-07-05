@@ -1,3 +1,5 @@
+declare module "ra-language-portuguese";
+
 export {};
 
 declare global {
