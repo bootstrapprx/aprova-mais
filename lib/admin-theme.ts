@@ -83,7 +83,7 @@ export const darkTheme: ThemeOptions = {
     warning: { main: "#fbbf24" },
     info: { main: "#818cf8" },
     success: { main: "#4ade80" },
-    divider: "#334155",
+    divider: "#1e293b",
     text: {
       primary: "#f1f5f9",
       secondary: "#94a3b8",

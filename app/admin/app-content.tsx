@@ -40,10 +40,20 @@ import { GraduationCap } from "lucide-react";
 const dataProvider = simpleRestProvider("/api");
 
 const AppContent = () => {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [currentTheme, setCurrentTheme] = useState<"light" | "dark">(
+    () =>
+      typeof document !== "undefined" &&
+      document.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light",
+  );
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    if (resolvedTheme === "light" || resolvedTheme === "dark") {
+      setCurrentTheme(resolvedTheme);
+    }
+  }, [resolvedTheme]);
 
   return (
     <Admin
@@ -51,7 +61,7 @@ const AppContent = () => {
       i18nProvider={i18nProvider}
       layout={Layout}
       dashboard={Dashboard}
-      theme={mounted && theme === "dark" ? darkTheme : lightTheme}
+      theme={currentTheme === "dark" ? darkTheme : lightTheme}
       title="Aprova Mais Admin"
     >
       <Resource

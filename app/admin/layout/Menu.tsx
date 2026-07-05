@@ -19,6 +19,7 @@ import {
 } from "react-admin";
 
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "./ThemeToggle";
 
 type MenuItem = {
   name: string;
@@ -101,6 +102,14 @@ export const Menu = () => {
           />
         ))}
       </RaMenu>
+      <div className="mt-auto px-4 py-3 border-t border-border/50">
+        <div className="flex items-center justify-between">
+          {open && (
+            <span className="text-xs text-muted-foreground">Tema</span>
+          )}
+          <ThemeToggle />
+        </div>
+      </div>
     </div>
   );
 };
