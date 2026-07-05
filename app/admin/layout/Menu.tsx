@@ -95,7 +95,7 @@ export const Menu = () => {
         {menuItems.map((item) => (
           <RaMenu.Item
             key={item.name}
-            to={`/${item.name}`}
+            to={item.name === "dashboard" ? "/" : `/${item.name}`}
             primaryText={item.label}
             leftIcon={<item.icon className="w-5 h-5" />}
           />
