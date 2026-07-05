@@ -13,6 +13,7 @@ import {
   Target,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useRedirect } from "react-admin";
 import {
   Card,
   CardContent,
@@ -22,14 +23,14 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 
 const statsConfig = [
-  { key: "courses", label: "Cursos", icon: GraduationCap, color: "from-indigo-500 to-purple-600" },
-  { key: "units", label: "Unidades", icon: Layers, color: "from-emerald-500 to-teal-600" },
-  { key: "lessons", label: "Aulas", icon: BookOpen, color: "from-blue-500 to-cyan-600" },
-  { key: "challenges", label: "Questões", icon: FileQuestion, color: "from-orange-500 to-red-600" },
-  { key: "challengeOptions", label: "Opções", icon: ListChecks, color: "from-pink-500 to-rose-600" },
-  { key: "users", label: "Usuários", icon: Users, color: "from-violet-500 to-purple-600" },
-  { key: "progress", label: "Progressos", icon: Trophy, color: "from-amber-500 to-yellow-600" },
-  { key: "subscriptions", label: "Assinaturas", icon: CreditCard, color: "from-sky-500 to-indigo-600" },
+  { key: "courses", resource: "courses", label: "Cursos", icon: GraduationCap, color: "from-indigo-500 to-purple-600" },
+  { key: "units", resource: "units", label: "Unidades", icon: Layers, color: "from-emerald-500 to-teal-600" },
+  { key: "lessons", resource: "lessons", label: "Aulas", icon: BookOpen, color: "from-blue-500 to-cyan-600" },
+  { key: "challenges", resource: "challenges", label: "Questões", icon: FileQuestion, color: "from-orange-500 to-red-600" },
+  { key: "challengeOptions", resource: "challengeOptions", label: "Opções", icon: ListChecks, color: "from-pink-500 to-rose-600" },
+  { key: "users", resource: "userProgress", label: "Usuários", icon: Users, color: "from-violet-500 to-purple-600" },
+  { key: "progress", resource: "challengeProgress", label: "Progressos", icon: Trophy, color: "from-amber-500 to-yellow-600" },
+  { key: "subscriptions", resource: "userSubscription", label: "Assinaturas", icon: CreditCard, color: "from-sky-500 to-indigo-600" },
 ];
 
 const mascotPhrases = [
@@ -42,6 +43,7 @@ const mascotPhrases = [
 ];
 
 export const Dashboard = () => {
+  const redirect = useRedirect();
   const [stats, setStats] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
 
@@ -117,7 +119,8 @@ export const Dashboard = () => {
           return (
             <Card
               key={stat.key}
-              className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
+              className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 overflow-hidden cursor-pointer"
+              onClick={() => redirect("list", stat.resource)}
             >
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium text-muted-foreground">

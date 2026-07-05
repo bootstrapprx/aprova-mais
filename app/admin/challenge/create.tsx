@@ -14,19 +14,8 @@ export const ChallengeCreate = () => {
   return (
     <Create>
       <SimpleForm>
-        <TextInput
-          source="question"
-          validate={[required()]}
-          label="Questão"
-          multiline
-          rows={3}
-        />
-        <TextInput
-          source="textoApoio"
-          label="Texto de Apoio"
-          multiline
-          rows={4}
-        />
+        <TextInput source="question" validate={[required()]} label="Questão" multiline rows={4} fullWidth />
+        <TextInput source="textoApoio" label="Texto de Apoio" multiline rows={4} fullWidth />
         <SelectInput
           source="type"
           validate={[required()]}
@@ -37,9 +26,10 @@ export const ChallengeCreate = () => {
             { id: "MULTIPLE_CORRECT", name: "MÚLTIPLA CORRETA" },
             { id: "TEXT_PASSAGE", name: "TEXTO" },
           ]}
+          fullWidth
         />
         <ReferenceInput source="lessonId" reference="lessons" label="Aula" />
-        <NumberInput source="order" validate={required()} label="Ordem" />
+        <NumberInput source="order" validate={required()} label="Ordem" fullWidth />
       </SimpleForm>
     </Create>
   );

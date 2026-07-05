@@ -1,9 +1,11 @@
 "use client";
 
 import {
+  DateTimeInput,
   Edit,
   SimpleForm,
   TextInput,
+  required,
 } from "react-admin";
 
 export const UserSubscriptionEdit = () => {
@@ -12,10 +14,10 @@ export const UserSubscriptionEdit = () => {
       <SimpleForm>
         <TextInput source="id" disabled />
         <TextInput source="userId" label="ID do Usuário" disabled />
-        <TextInput source="stripeCustomerId" label="Customer ID (Stripe)" />
-        <TextInput source="stripeSubscriptionId" label="Subscription ID (Stripe)" />
-        <TextInput source="stripePriceId" label="Price ID (Stripe)" />
-        <TextInput source="stripeCurrentPeriodEnd" label="Fim do Período" />
+        <TextInput source="stripeCustomerId" validate={[required()]} label="Customer ID (Stripe)" fullWidth />
+        <TextInput source="stripeSubscriptionId" validate={[required()]} label="Subscription ID (Stripe)" fullWidth />
+        <TextInput source="stripePriceId" validate={[required()]} label="Price ID (Stripe)" fullWidth />
+        <DateTimeInput source="stripeCurrentPeriodEnd" validate={[required()]} label="Fim do Período" fullWidth />
       </SimpleForm>
     </Edit>
   );

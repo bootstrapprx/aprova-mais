@@ -13,9 +13,9 @@ export const LessonEdit = () => {
   return (
     <Edit>
       <SimpleForm>
-        <TextInput source="title" validate={[required()]} label="Título" />
+        <TextInput source="title" validate={[required()]} label="Título" fullWidth />
         <ReferenceInput source="unitId" reference="units" label="Unidade" />
-        <NumberInput source="order" validate={required()} label="Ordem" />
+        <NumberInput source="order" validate={required()} label="Ordem" fullWidth />
       </SimpleForm>
     </Edit>
   );

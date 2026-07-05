@@ -13,11 +13,11 @@ export const ChallengeOptionCreate = () => {
   return (
     <Create>
       <SimpleForm>
-        <TextInput source="text" validate={[required()]} label="Texto" />
+        <TextInput source="text" validate={[required()]} label="Texto" multiline rows={3} fullWidth />
         <BooleanInput source="correct" label="Correta" />
         <ReferenceInput source="challengeId" reference="challenges" label="Questão" />
-        <TextInput source="imageSrc" label="URL da Imagem" />
-        <TextInput source="audioSrc" label="URL do Áudio" />
+        <TextInput source="imageSrc" label="URL da Imagem" fullWidth />
+        <TextInput source="audioSrc" label="URL do Áudio" fullWidth />
       </SimpleForm>
     </Create>
   );
