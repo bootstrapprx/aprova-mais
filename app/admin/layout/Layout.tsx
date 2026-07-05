@@ -5,7 +5,7 @@ import { Layout as RaLayout } from "react-admin";
 
 import { Menu } from "./Menu";
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout = ({ children }: { children?: ReactNode }) => {
   return (
     <RaLayout menu={Menu}>
       {children}
