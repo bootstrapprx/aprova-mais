@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  BooleanField,
   Datagrid,
   ImageField,
   List,
@@ -17,6 +18,7 @@ export const CourseList = () => {
         <TextField source="banca" label="Banca" />
         <NumberField source="ano" label="Ano" />
         <TextField source="orgao" label="Órgão" />
+        <BooleanField source="active" label="Ativo" />
         <ImageField source="imageSrc" label="Imagem" />
       </Datagrid>
     </List>

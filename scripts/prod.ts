@@ -25,12 +25,23 @@ type UnitDef = {
   lessons: LessonDef[];
 };
 
-const courseData: { title: string; imageSrc: string; banca: string; ano: number; orgao: string; units: UnitDef[] } = {
+const courseData: {
+  title: string;
+  imageSrc: string;
+  banca: string;
+  ano: number;
+  orgao: string;
+  description?: string;
+  active?: boolean;
+  units: UnitDef[];
+} = {
   title: "INSS 2026",
   imageSrc: "/br.svg",
   banca: "CESPE",
   ano: 2026,
   orgao: "INSS",
+  description: "Curso completo para o concurso do INSS 2026, abordando todos os tópicos do edital com questões comentadas.",
+  active: true,
   units: [
     {
       title: "Língua Portuguesa",
@@ -1415,6 +1426,8 @@ const main = async () => {
         banca: courseData.banca,
         ano: courseData.ano,
         orgao: courseData.orgao,
+        description: courseData.description,
+        active: courseData.active,
       })
       .returning();
     console.log(`Course created: ${course.title}`);

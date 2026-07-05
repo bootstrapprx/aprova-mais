@@ -16,6 +16,8 @@ export const courses = pgTable("courses", {
   banca: text("banca").notNull(),
   ano: integer("ano").notNull(),
   orgao: text("orgao").notNull(),
+  description: text("description"),
+  active: boolean("active").notNull().default(true),
 });
 
 export const coursesRelations = relations(courses, ({ many }) => ({

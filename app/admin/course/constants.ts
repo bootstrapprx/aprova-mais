@@ -1,0 +1,32 @@
+export const BANCA_CHOICES = [
+  { id: "CESPE", name: "CESPE (CEBRASPE)" },
+  { id: "FCC", name: "FCC" },
+  { id: "FGV", name: "FGV" },
+  { id: "VUNESP", name: "VUNESP" },
+  { id: "CESGRANRIO", name: "CESGRANRIO" },
+  { id: "CONSULPLAN", name: "CONSULPLAN" },
+  { id: "FUNCAB", name: "FUNCAB" },
+  { id: "ESAF", name: "ESAF" },
+  { id: "FEPESE", name: "FEPESE" },
+  { id: "IBFC", name: "IBFC" },
+  { id: "AOCP", name: "AOCP" },
+  { id: "QUADRIX", name: "QUADRIX" },
+  { id: "IDECAN", name: "IDECAN" },
+  { id: "INSTITUTO AOCP", name: "Instituto AOCP" },
+  { id: "MOVENS", name: "Movens" },
+];
+
+export const ORGAO_CHOICES = [
+  { id: "INSS", name: "INSS" },
+  { id: "PF", name: "Polícia Federal" },
+  { id: "PRF", name: "Polícia Rodoviária Federal" },
+  { id: "BACEN", name: "Banco Central" },
+  { id: "STN", name: "Secretaria do Tesouro Nacional" },
+  { id: "AGU", name: "Advocacia-Geral da União" },
+  { id: "TCU", name: "Tribunal de Contas da União" },
+  { id: "STF", name: "Supremo Tribunal Federal" },
+  { id: "CNU", name: "Concurso Nacional Unificado" },
+  { id: "MEC", name: "Ministério da Educação" },
+  { id: "MS", name: "Ministério da Saúde" },
+  { id: "MJSP", name: "Ministério da Justiça e Segurança Pública" },
+];
