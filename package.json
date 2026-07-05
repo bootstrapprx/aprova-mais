@@ -48,7 +48,7 @@
     "ra-i18n-polyglot": "^4.0.0",
     "ra-language-portuguese": "^1.6.0",
     "react": "^19.2.7",
-    "react-admin": "^4.16.20",
+    "react-admin": "^5.15.1",
     "react-circular-progressbar": "^2.2.0",
     "react-confetti": "^6.4.0",
     "react-dom": "^19.2.7",
