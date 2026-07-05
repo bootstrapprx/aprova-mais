@@ -16,7 +16,7 @@ export const ChallengeProgressCreate = () => {
       <SimpleForm>
         <TextInput source="userId" validate={[required()]} label="ID do Usuário" />
         <ReferenceInput source="challengeId" reference="challenges" label="Questão" />
-        <BooleanInput source="completed" label="Completo" defaultValue={false} />
+        <BooleanInput source="completed" label="Completo" />
       </SimpleForm>
     </Create>
   );
