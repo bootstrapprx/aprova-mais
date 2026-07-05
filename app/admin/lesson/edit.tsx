@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Edit,
   NumberInput,
@@ -11,10 +13,9 @@ export const LessonEdit = () => {
   return (
     <Edit>
       <SimpleForm>
-        <NumberInput source="id" validate={[required()]} label="Id" />
-        <TextInput source="title" validate={[required()]} label="Title" />
-        <ReferenceInput source="unitId" reference="units" />
-        <NumberInput source="order" validate={required()} label="Order" />
+        <TextInput source="title" validate={[required()]} label="Título" />
+        <ReferenceInput source="unitId" reference="units" label="Unidade" />
+        <NumberInput source="order" validate={required()} label="Ordem" />
       </SimpleForm>
     </Edit>
   );

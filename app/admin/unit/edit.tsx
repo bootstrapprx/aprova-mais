@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Edit,
   NumberInput,
@@ -11,15 +13,16 @@ export const UnitEdit = () => {
   return (
     <Edit>
       <SimpleForm>
-        <NumberInput source="id" validate={[required()]} label="Id" />
-        <TextInput source="title" validate={[required()]} label="Title" />
+        <TextInput source="title" validate={[required()]} label="Título" />
         <TextInput
           source="description"
           validate={[required()]}
-          label="Description"
+          label="Descrição"
+          multiline
+          rows={3}
         />
-        <ReferenceInput source="courseId" reference="courses" />
-        <NumberInput source="order" validate={required()} label="Order" />
+        <ReferenceInput source="courseId" reference="courses" label="Curso" />
+        <NumberInput source="order" validate={required()} label="Ordem" />
       </SimpleForm>
     </Edit>
   );

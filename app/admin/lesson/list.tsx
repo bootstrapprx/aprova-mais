@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Datagrid,
   List,
@@ -11,9 +13,9 @@ export const LessonList = () => {
     <List>
       <Datagrid rowClick="edit">
         <NumberField source="id" />
-        <TextField source="title" />
-        <ReferenceField source="unitId" reference="units" />
-        <NumberField source="order" />
+        <TextField source="title" label="Título" />
+        <ReferenceField source="unitId" reference="units" label="Unidade" />
+        <NumberField source="order" label="Ordem" />
       </Datagrid>
     </List>
   );

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 180" fill="none">
+  <defs>
+    <linearGradient id="owlBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cap -->
+  <path d="M50 40 L80 28 L110 40 L80 52 Z" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+  <path d="M80 28 L80 16" stroke="#d97706" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="80" cy="13" r="3.5" fill="#ef4444"/>
+
+  <!-- Head -->
+  <ellipse cx="80" cy="78" rx="38" ry="34" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+
+  <!-- Eyebrows (expressive) -->
+  <path d="M50 62 Q65 55 80 62" fill="none" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M80 62 Q95 55 110 62" fill="none" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Eyes (big, focused) -->
+  <ellipse cx="65" cy="78" rx="14" ry="12" fill="white" stroke="#6366f1" stroke-width="2"/>
+  <ellipse cx="65" cy="78" rx="6" ry="6" fill="#1e293b"/>
+  <ellipse cx="67" cy="76" rx="2" ry="2" fill="white"/>
+
+  <ellipse cx="95" cy="78" rx="14" ry="12" fill="white" stroke="#6366f1" stroke-width="2"/>
+  <ellipse cx="95" cy="78" rx="6" ry="6" fill="#1e293b"/>
+  <ellipse cx="97" cy="76" rx="2" ry="2" fill="white"/>
+
+  <!-- Beak -->
+  <path d="M77 88 Q80 94 83 88" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+
+  <!-- Smile -->
+  <path d="M72 94 Q80 100 88 94" fill="none" stroke="#92400e" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Body -->
+  <rect x="55" y="112" width="50" height="42" rx="8" fill="url(#owlBody)"/>
+
+  <!-- Belly pattern -->
+  <path d="M65 122 Q80 116 95 122" fill="none" stroke="#a78bfa" stroke-width="1" opacity="0.5"/>
+  <path d="M65 128 Q80 122 95 128" fill="none" stroke="#a78bfa" stroke-width="1" opacity="0.5"/>
+  <path d="M65 134 Q80 128 95 134" fill="none" stroke="#a78bfa" stroke-width="1" opacity="0.5"/>
+
+  <!-- Wings -->
+  <path d="M55 122 L40 140 L44 144 L55 132" fill="#7c3aed" stroke="#6d28d9" stroke-width="1.5"/>
+  <path d="M105 122 L120 140 L116 144 L105 132" fill="#7c3aed" stroke="#6d28d9" stroke-width="1.5"/>
+
+  <!-- Clipboard -->
+  <rect x="112" y="126" width="14" height="18" rx="2" fill="white" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="115" y="123" width="8" height="4" rx="1" fill="#22c55e"/>
+  <line x1="115" y1="130" x2="123" y2="130" stroke="#22c55e" stroke-width="1"/>
+  <line x1="115" y1="133" x2="122" y2="133" stroke="#22c55e" stroke-width="1"/>
+  <line x1="115" y1="136" x2="123" y2="136" stroke="#22c55e" stroke-width="1"/>
+  <line x1="115" y1="139" x2="120" y2="139" stroke="#22c55e" stroke-width="1"/>
+
+  <!-- Pen -->
+  <line x1="38" y1="132" x2="44" y2="148" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="38" cy="131" r="2" fill="#ef4444"/>
+
+  <!-- Feet -->
+  <rect x="62" y="152" width="12" height="5" rx="2.5" fill="#f59e0b"/>
+  <rect x="86" y="152" width="12" height="5" rx="2.5" fill="#f59e0b"/>
+</svg>

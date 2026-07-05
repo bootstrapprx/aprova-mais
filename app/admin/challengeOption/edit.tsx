@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BooleanInput,
   Edit,
@@ -11,11 +13,11 @@ export const ChallengeOptionEdit = () => {
   return (
     <Edit>
       <SimpleForm>
-        <TextInput source="text" validate={[required()]} label="Text" />
-        <BooleanInput source="correct" label="Correct option" />
-        <ReferenceInput source="challengeId" reference="challenges" />
-        <TextInput source="imageSrc" label="Image URL" />
-        <TextInput source="audioSrc" label="Audio URL" />
+        <TextInput source="text" validate={[required()]} label="Texto" />
+        <BooleanInput source="correct" label="Correta" />
+        <ReferenceInput source="challengeId" reference="challenges" label="Questão" />
+        <TextInput source="imageSrc" label="URL da Imagem" />
+        <TextInput source="audioSrc" label="URL do Áudio" />
       </SimpleForm>
     </Edit>
   );

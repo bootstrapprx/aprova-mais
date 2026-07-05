@@ -3,23 +3,20 @@
 import {
   BooleanField,
   Datagrid,
-  ImageField,
   List,
   NumberField,
   ReferenceField,
   TextField,
 } from "react-admin";
 
-export const ChallengeOptionsList = () => {
+export const ChallengeProgressList = () => {
   return (
     <List>
       <Datagrid rowClick="edit">
         <NumberField source="id" />
-        <TextField source="text" label="Texto" />
-        <BooleanField source="correct" label="Correta" />
+        <TextField source="userId" label="Usuário" />
         <ReferenceField source="challengeId" reference="challenges" label="Questão" />
-        <ImageField source="imageSrc" label="Imagem" />
-        <TextField source="audioSrc" label="Áudio" />
+        <BooleanField source="completed" label="Completo" />
       </Datagrid>
     </List>
   );

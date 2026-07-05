@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="capGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cap -->
+  <path d="M60 52 L100 38 L140 52 L100 66 Z" fill="url(#capGrad)" stroke="#15803d" stroke-width="2"/>
+  <path d="M100 38 L100 22" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="100" cy="18" r="4" fill="#fcd34d"/>
+  <path d="M58 52 L50 56 L100 72 L150 56 L142 52" fill="url(#capGrad)" stroke="#15803d" stroke-width="1.5"/>
+
+  <!-- Head -->
+  <ellipse cx="100" cy="98" rx="46" ry="42" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+
+  <!-- Glasses -->
+  <circle cx="80" cy="94" r="16" fill="none" stroke="#6366f1" stroke-width="2.5"/>
+  <circle cx="120" cy="94" r="16" fill="none" stroke="#6366f1" stroke-width="2.5"/>
+  <path d="M96 94 L104 94" stroke="#6366f1" stroke-width="2.5"/>
+  <path d="M64 94 L56 90" stroke="#6366f1" stroke-width="2"/>
+  <path d="M136 94 L144 90" stroke="#6366f1" stroke-width="2"/>
+
+  <!-- Eyes -->
+  <ellipse cx="80" cy="90" rx="4" ry="5" fill="#1e293b"/>
+  <ellipse cx="120" cy="90" rx="4" ry="5" fill="#1e293b"/>
+  <ellipse cx="81" cy="88" rx="1.5" ry="1.5" fill="white"/>
+  <ellipse cx="121" cy="88" rx="1.5" ry="1.5" fill="white"/>
+
+  <!-- Eyebrows -->
+  <path d="M65 78 Q80 72 95 78" fill="none" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M105 78 Q120 72 135 78" fill="none" stroke="#92400e" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Beak (owl nose) -->
+  <path d="M96 104 Q100 112 104 104" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+
+  <!-- Smile -->
+  <path d="M88 112 Q100 120 112 112" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Cheeks -->
+  <ellipse cx="65" cy="106" rx="8" ry="4" fill="#fca5a5" opacity="0.4"/>
+  <ellipse cx="135" cy="106" rx="8" ry="4" fill="#fca5a5" opacity="0.4"/>
+
+  <!-- Body -->
+  <rect x="70" y="140" width="60" height="50" rx="10" fill="url(#bodyGrad)"/>
+  <rect x="70" y="140" width="60" height="10" rx="3" fill="#818cf8"/>
+
+  <!-- Wings / Arms -->
+  <path d="M70 150 L50 170 L55 175 L70 165" fill="#4f46e5" stroke="#4338ca" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M130 150 L150 170 L145 175 L130 165" fill="#4f46e5" stroke="#4338ca" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <!-- Book in left wing -->
+  <rect x="44" y="162" width="16" height="12" rx="1" fill="white" stroke="#22c55e" stroke-width="1.5"/>
+  <line x1="52" y1="162" x2="52" y2="174" stroke="#22c55e" stroke-width="1"/>
+  <line x1="48" y1="166" x2="50" y2="166" stroke="#22c55e" stroke-width="0.8"/>
+  <line x1="48" y1="169" x2="50" y2="169" stroke="#22c55e" stroke-width="0.8"/>
+  <line x1="54" y1="166" x2="56" y2="166" stroke="#22c55e" stroke-width="0.8"/>
+  <line x1="54" y1="169" x2="56" y2="169" stroke="#22c55e" stroke-width="0.8"/>
+
+  <!-- Feet -->
+  <rect x="78" y="188" width="14" height="6" rx="3" fill="#f59e0b"/>
+  <rect x="108" y="188" width="14" height="6" rx="3" fill="#f59e0b"/>
+
+  <!-- Feather detail -->
+  <path d="M85 148 Q100 142 115 148" fill="none" stroke="#a5b4fc" stroke-width="1" opacity="0.5"/>
+  <path d="M85 155 Q100 149 115 155" fill="none" stroke="#a5b4fc" stroke-width="1" opacity="0.5"/>
+</svg>

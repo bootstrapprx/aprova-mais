@@ -3,21 +3,20 @@
 import {
   BooleanInput,
   Create,
+  NumberInput,
   ReferenceInput,
   SimpleForm,
   TextInput,
   required,
 } from "react-admin";
 
-export const ChallengeOptionCreate = () => {
+export const ChallengeProgressCreate = () => {
   return (
     <Create>
       <SimpleForm>
-        <TextInput source="text" validate={[required()]} label="Texto" />
-        <BooleanInput source="correct" label="Correta" />
+        <TextInput source="userId" validate={[required()]} label="ID do Usuário" />
         <ReferenceInput source="challengeId" reference="challenges" label="Questão" />
-        <TextInput source="imageSrc" label="URL da Imagem" />
-        <TextInput source="audioSrc" label="URL do Áudio" />
+        <BooleanInput source="completed" label="Completo" defaultValue={false} />
       </SimpleForm>
     </Create>
   );
