@@ -90,7 +90,7 @@ confirm:
 	@echo "║  • Docker Compose: docker-compose.prod.yml ║"
 	@echo "╚════════════════════════════════════════════╝"
 	@echo ""
-	@read -p "Confirmar atualização? (Enter para continuar, Ctrl+C para cancelar)"
+	@printf "Confirmar atualização? (Enter para continuar, Ctrl+C para cancelar)"; read dummy
 
 # ─── Qualidade ─────────────────────────────────────────────────
 
