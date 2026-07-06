@@ -130,7 +130,11 @@ export const Quiz = ({
     if (isCorrect()) {
       startTransition(() => {
         upsertChallengeProgress(challenge.id)
-          .then(() => {
+          .then((result) => {
+            if (result?.error) {
+              toast.error(result.error);
+              return;
+            }
             void correctControls.play();
             setStatus("correct");
             setPercentage((prev) => prev + 100 / challenges.length);

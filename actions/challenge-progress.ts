@@ -1,78 +1,74 @@
 "use server";
 
-import { and, eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 import db from "@/db/drizzle";
-import { getUserProgress } from "@/db/queries";
 import { challengeProgress, challenges, userProgress } from "@/db/schema";
 import { getServerUserId } from "@/lib/supabase-server";
 
 export const upsertChallengeProgress = async (challengeId: number) => {
-  const userId = await getServerUserId();
+  try {
+    const userId = await getServerUserId();
+    if (!userId) return { error: "Unauthorized." };
 
-  if (!userId) throw new Error("Unauthorized.");
+    const challenge = await db.query.challenges.findFirst({
+      where: eq(challenges.id, challengeId),
+    });
 
-  const currentUserProgress = await getUserProgress();
+    if (!challenge) return { error: "Challenge not found." };
 
-  if (!currentUserProgress) throw new Error("User progress not found.");
+    const lessonId = challenge.lessonId;
 
-  const challenge = await db.query.challenges.findFirst({
-    where: eq(challenges.id, challengeId),
-  });
+    const existingChallengeProgress = await db.query.challengeProgress.findFirst({
+      where: and(
+        eq(challengeProgress.userId, userId),
+        eq(challengeProgress.challengeId, challengeId)
+      ),
+    });
 
-  if (!challenge) throw new Error("Challenge not found.");
+    const isPractice = !!existingChallengeProgress;
 
-  const lessonId = challenge.lessonId;
+    if (isPractice) {
+      await db.transaction(async (tx) => {
+        await tx
+          .update(challengeProgress)
+          .set({ completed: true })
+          .where(eq(challengeProgress.id, existingChallengeProgress.id));
 
-  const existingChallengeProgress = await db.query.challengeProgress.findFirst({
-    where: and(
-      eq(challengeProgress.userId, userId),
-      eq(challengeProgress.challengeId, challengeId)
-    ),
-  });
+        await tx
+          .update(userProgress)
+          .set({
+            points: sql`${userProgress.points} + 10`,
+          })
+          .where(eq(userProgress.userId, userId));
+      });
+    } else {
+      await db.transaction(async (tx) => {
+        await tx.insert(challengeProgress).values({
+          challengeId,
+          userId,
+          completed: true,
+        });
 
-  const isPractice = !!existingChallengeProgress;
-
-  if (isPractice) {
-    await db
-      .update(challengeProgress)
-      .set({
-        completed: true,
-      })
-      .where(eq(challengeProgress.id, existingChallengeProgress.id));
-
-    await db
-      .update(userProgress)
-      .set({
-        points: currentUserProgress.points + 10,
-      })
-      .where(eq(userProgress.userId, userId));
+        await tx
+          .update(userProgress)
+          .set({
+            points: sql`${userProgress.points} + 10`,
+          })
+          .where(eq(userProgress.userId, userId));
+      });
+    }
 
     revalidatePath("/learn");
     revalidatePath("/lesson");
     revalidatePath("/quests");
     revalidatePath("/leaderboard");
     revalidatePath(`/lesson/${lessonId}`);
-    return;
+
+    return { success: true };
+  } catch (error) {
+    console.error("[upsertChallengeProgress]", error);
+    return { error: "Algo deu errado. Tente novamente." };
   }
-
-  await db.insert(challengeProgress).values({
-    challengeId,
-    userId,
-    completed: true,
-  });
-
-  await db
-    .update(userProgress)
-    .set({
-      points: currentUserProgress.points + 10,
-    })
-    .where(eq(userProgress.userId, userId));
-
-  revalidatePath("/learn");
-  revalidatePath("/lesson");
-  revalidatePath("/quests");
-  revalidatePath("/leaderboard");
-  revalidatePath(`/lesson/${lessonId}`);
 };

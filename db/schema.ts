@@ -7,6 +7,7 @@ import {
   serial,
   text,
   timestamp,
+  unique,
 } from "drizzle-orm/pg-core";
 
 export const courses = pgTable("courses", {
@@ -125,7 +126,9 @@ export const challengeProgress = pgTable("challenge_progress", {
     })
     .notNull(),
   completed: boolean("completed").notNull().default(false),
-});
+}, (t) => ({
+  unq: unique().on(t.userId, t.challengeId),
+}));
 
 export const challengeProgressRelations = relations(
   challengeProgress,
