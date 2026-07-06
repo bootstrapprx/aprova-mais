@@ -2,16 +2,26 @@
 
 import {
   Datagrid,
+  Filter,
   ImageField,
   List,
   NumberField,
   ReferenceField,
+  ReferenceInput,
+  SearchInput,
   TextField,
 } from "react-admin";
 
+const UserProgressFilter = () => (
+  <Filter>
+    <SearchInput source="q" alwaysOn />
+    <ReferenceInput source="activeCourseId" reference="courses" label="Curso" />
+  </Filter>
+);
+
 export const UserProgressList = () => {
   return (
-    <List>
+    <List filters={<UserProgressFilter />}>
       <Datagrid rowClick="edit">
         <TextField source="userId" label="Usuário" />
         <TextField source="userName" label="Nome" />

@@ -2,17 +2,29 @@
 
 import {
   BooleanField,
+  BooleanInput,
   Datagrid,
+  Filter,
   ImageField,
   List,
   NumberField,
   ReferenceField,
+  ReferenceInput,
+  SearchInput,
   TextField,
 } from "react-admin";
 
+const ChallengeOptionFilter = () => (
+  <Filter>
+    <SearchInput source="q" alwaysOn />
+    <ReferenceInput source="challengeId" reference="challenges" label="Questão" />
+    <BooleanInput source="correct" label="Correta" />
+  </Filter>
+);
+
 export const ChallengeOptionsList = () => {
   return (
-    <List>
+    <List filters={<ChallengeOptionFilter />}>
       <Datagrid rowClick="edit">
         <NumberField source="id" />
         <TextField source="text" label="Texto" />

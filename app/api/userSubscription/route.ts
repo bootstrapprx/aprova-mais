@@ -1,22 +1,69 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { and, asc, desc, eq, ilike, or, count, type SQL } from "drizzle-orm";
 
 import db from "@/db/drizzle";
 import { userSubscription } from "@/db/schema";
 import { getIsAdmin } from "@/lib/admin";
+import { parseQuery, sendResponse } from "@/lib/api-helpers";
 
-export const GET = async () => {
+const buildOrderBy = (sort: string, dir: "asc" | "desc") => {
+  const d = dir === "desc" ? desc : asc;
+  switch (sort) {
+    case "userId": return d(userSubscription.userId);
+    case "stripePriceId": return d(userSubscription.stripePriceId);
+    case "stripeCurrentPeriodEnd": return d(userSubscription.stripeCurrentPeriodEnd);
+    default: return d(userSubscription.id);
+  }
+};
+
+const buildWhere = (filter: Record<string, unknown>): SQL | undefined => {
+  const c: SQL[] = [];
+
+  const q = (filter.q as string) || "";
+  if (q) {
+    c.push(or(
+      ilike(userSubscription.userId, `%${q}%`),
+      ilike(userSubscription.stripeSubscriptionId, `%${q}%`),
+      ilike(userSubscription.stripeCustomerId, `%${q}%`),
+    ) as SQL);
+  }
+
+  return c.length ? and(...c) : undefined;
+};
+
+export const GET = async (req: NextRequest) => {
   const isAdmin = await getIsAdmin();
   if (!isAdmin) return new NextResponse("Unauthorized.", { status: 401 });
 
-  const data = await db.query.userSubscription.findMany();
-  return NextResponse.json(data);
+  const { filter, sort, order, offset, limit } = parseQuery(req);
+  const where = buildWhere(filter);
+
+  const data = await db.query.userSubscription.findMany({
+    where,
+    orderBy: buildOrderBy(sort, order),
+    offset,
+    limit,
+  });
+
+  const [totalResult] = await db.select({ value: count() }).from(userSubscription).where(where);
+  const total = Number(totalResult?.value ?? 0);
+
+  return sendResponse(data, total, offset);
 };
+
 
 export const POST = async (req: NextRequest) => {
   const isAdmin = await getIsAdmin();
   if (!isAdmin) return new NextResponse("Unauthorized.", { status: 401 });
 
   const body = (await req.json()) as typeof userSubscription.$inferSelect;
-  const data = await db.insert(userSubscription).values({ ...body }).returning();
+
+  const data = await db
+    .insert(userSubscription)
+    .values({
+      ...body,
+    })
+    .returning();
+
   return NextResponse.json(data[0]);
 };

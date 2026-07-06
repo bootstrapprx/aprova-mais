@@ -1,10 +1,23 @@
 "use client";
 
-import { Datagrid, List, NumberField, TextField } from "react-admin";
+import {
+  Datagrid,
+  Filter,
+  List,
+  NumberField,
+  SearchInput,
+  TextField,
+} from "react-admin";
+
+const UserSubscriptionFilter = () => (
+  <Filter>
+    <SearchInput source="q" alwaysOn />
+  </Filter>
+);
 
 export const UserSubscriptionList = () => {
   return (
-    <List>
+    <List filters={<UserSubscriptionFilter />}>
       <Datagrid rowClick="edit">
         <NumberField source="id" />
         <TextField source="userId" label="Usuário" />
