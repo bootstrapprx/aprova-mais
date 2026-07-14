@@ -1,0 +1,59 @@
+[
+  {
+    "title": "INSS 2026",
+    "imageSrc": "/br.svg",
+    "banca": "CESPE",
+    "ano": 2026,
+    "orgao": "INSS",
+    "description": "Curso completo para o concurso do INSS 2026",
+    "units": [
+      {
+        "title": "Língua Portuguesa",
+        "description": "Interpretação de textos, gramática, ortografia e sintaxe",
+        "lessons": [
+          {
+            "title": "Compreensão e Interpretação de Textos",
+            "challenges": [
+              {
+                "type": "SELECT",
+                "question": "Assinale a alternativa que apresenta uma estratégia adequada para identificar a ideia principal de um texto:",
+                "options": [
+                  { "text": "Localizar a frase que resume o conteúdo do texto", "correct": true },
+                  { "text": "Contar o número de palavras do texto", "correct": false },
+                  { "text": "Ignorar os conectivos", "correct": false }
+                ]
+              },
+              {
+                "type": "TRUE_FALSE",
+                "question": "A intertextualidade ocorre quando um texto faz referência a outro texto, seja de forma explícita ou implícita.",
+                "options": [
+                  { "text": "Verdadeiro", "correct": true },
+                  { "text": "Falso", "correct": false }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Raciocínio Lógico",
+        "description": "Estruturas lógicas",
+        "lessons": [
+          {
+            "title": "Estruturas Lógicas",
+            "challenges": [
+              {
+                "type": "SELECT",
+                "question": "Se todos os A são B e nenhum B é C, então pode-se concluir que:",
+                "options": [
+                  { "text": "Nenhum A é C", "correct": true },
+                  { "text": "Todo C é A", "correct": false }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
