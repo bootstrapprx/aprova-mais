@@ -9,15 +9,19 @@ import path from "path";
 const sql = postgres(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
 
-async function exportLessons() {
-  console.log("Fetching courses and lessons...");
+async function exportCourses() {
+  console.log("Fetching courses with full nesting...");
   const courses = await db.query.courses.findMany({
+    where: schema.courses.active,
     with: {
       units: {
+        orderBy: (units, { asc }) => [asc(units.order)],
         with: {
           lessons: {
+            orderBy: (lessons, { asc }) => [asc(lessons.order)],
             with: {
               challenges: {
+                orderBy: (challenges, { asc }) => [asc(challenges.order)],
                 with: {
                   challengeOptions: true,
                 },
@@ -34,13 +38,13 @@ async function exportLessons() {
     fs.mkdirSync(outDir, { recursive: true });
   }
 
-  const outFile = path.join(outDir, "lessons.json");
+  const outFile = path.join(outDir, "courses.json");
   fs.writeFileSync(outFile, JSON.stringify(courses, null, 2));
-  console.log(`Exported lessons to ${outFile}`);
+  console.log(`Exported ${courses.length} courses to ${outFile}`);
   process.exit(0);
 }
 
-exportLessons().catch((e) => {
+exportCourses().catch((e) => {
   console.error(e);
   process.exit(1);
 });

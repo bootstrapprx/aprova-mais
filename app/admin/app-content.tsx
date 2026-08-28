@@ -34,6 +34,9 @@ import { ChallengeProgressList } from "./challengeProgress/list";
 import { UserSubscriptionCreate } from "./userSubscription/create";
 import { UserSubscriptionEdit } from "./userSubscription/edit";
 import { UserSubscriptionList } from "./userSubscription/list";
+import { MapLayoutCreate } from "./mapLayout/create";
+import { MapLayoutEdit } from "./mapLayout/edit";
+import { MapLayoutList } from "./mapLayout/list";
 
 import { GraduationCap } from "lucide-react";
 
@@ -124,6 +127,14 @@ const AppContent = () => {
         create={UserSubscriptionCreate}
         edit={UserSubscriptionEdit}
         options={{ label: "Assinaturas" }}
+      />
+      <Resource
+        name="mapLayouts"
+        recordRepresentation={(record: { courseId: number }) => `Curso #${record.courseId}`}
+        list={MapLayoutList}
+        create={MapLayoutCreate}
+        edit={MapLayoutEdit}
+        options={{ label: "Mapas 3D" }}
       />
     </Admin>
   );

@@ -1,0 +1,117 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/building_board.gd" id="1_bboard"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.25, 0.4, 0.65, 1)
+sky_horizon_color = Color(0.5, 0.58, 0.7, 1)
+ground_bottom_color = Color(0.15, 0.12, 0.1, 1)
+ground_horizon_color = Color(0.35, 0.38, 0.4, 1)
+
+[sub_resource type="Sky" id="Sky_board"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_board"]
+background_mode = 2
+sky = SubResource("Sky_board")
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.55, 0.6, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.45, 0.5, 0.6, 1)
+fog_density = 0.02
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.28, 0.32, 0.38, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+size = Vector3(12, 0.5, 4)
+
+[sub_resource type="StandardMaterial3D" id="Material_base"]
+albedo_color = Color(0.22, 0.24, 0.28, 1)
+roughness = 0.8
+
+[node name="BuildingBoard" type="Node3D"]
+script = ExtResource("1_bboard")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_board")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 8, 5)
+light_energy = 1.0
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 5, 10)
+fov = 50.0
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ground")
+material_override = SubResource("Material_ground")
+
+[node name="BuildingBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("BoxMesh_base")
+material_override = SubResource("Material_base")
+
+[node name="BuildingContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="FloorLabels" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TopBar" type="HBoxContainer" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 45.0
+offset_left = 10.0
+offset_right = -10.0
+theme_override_constants/separation = 15
+
+[node name="BackButton" type="Button" parent="HUD/TopBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(80, 35)
+text = "← Voltar"
+theme_override_font_sizes/font_size = 14
+
+[node name="TitleLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Curso"
+theme_override_font_sizes/font_size = 18
+
+[node name="ProgressLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "Andar 1/1"
+theme_override_font_sizes/font_size = 14
+
+[node name="XPLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "XP: 0"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.9, 0.7, 0.1, 1)
+
+[node name="FloorNavHint" type="Label" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -35.0
+offset_right = 150.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Role para navegar entre andares"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.5, 0.52, 0.55, 1)

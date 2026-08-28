@@ -1,0 +1,139 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/graph_scene.gd" id="1_graph"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.12, 0.14, 0.22, 1)
+sky_horizon_color = Color(0.18, 0.2, 0.28, 1)
+ground_bottom_color = Color(0.06, 0.07, 0.1, 1)
+ground_horizon_color = Color(0.12, 0.14, 0.18, 1)
+
+[sub_resource type="Sky" id="Sky_graph"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_graph"]
+background_mode = 2
+sky = SubResource("Sky_graph")
+ambient_light_source = 2
+ambient_light_color = Color(0.4, 0.42, 0.5, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.15, 0.17, 0.22, 1)
+fog_density = 0.015
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(60, 60)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.1, 0.12, 0.16, 1)
+roughness = 0.95
+
+[node name="GraphScene" type="Node3D"]
+script = ExtResource("1_graph")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_graph")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+light_energy = 0.8
+omni_range = 25.0
+omni_attenuation = 1.2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 10, 18)
+fov = 50.0
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ground")
+material_override = SubResource("Material_ground")
+
+[node name="NodesContainer" type="Node3D" parent="."]
+
+[node name="EdgesContainer" type="Node3D" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TopBar" type="HBoxContainer" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 45.0
+offset_left = 10.0
+offset_right = -10.0
+theme_override_constants/separation = 15
+
+[node name="BackButton" type="Button" parent="HUD/TopBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(80, 35)
+text = "← Voltar"
+theme_override_font_sizes/font_size = 14
+
+[node name="TitleLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Grafo de Conceitos"
+theme_override_font_sizes/font_size = 18
+
+[node name="XPLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "XP: 0"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.9, 0.7, 0.1, 1)
+
+[node name="LevelLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "Nível 1"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.3, 0.6, 0.9, 1)
+
+[node name="InfoPanel" type="PanelContainer" parent="HUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -100.0
+offset_right = -10.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/InfoPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="HUD/InfoPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InfoTitle" type="Label" parent="HUD/InfoPanel/MarginContainer/VBox"]
+layout_mode = 2
+text = "Tópico"
+theme_override_font_sizes/font_size = 16
+
+[node name="InfoDesc" type="Label" parent="HUD/InfoPanel/MarginContainer/VBox"]
+layout_mode = 2
+text = "Unidade: ..."
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.6, 0.62, 0.65, 1)
+autowrap_mode = 2
+
+[node name="InfoChallenges" type="Label" parent="HUD/InfoPanel/MarginContainer/VBox"]
+layout_mode = 2
+text = "0 questões"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.5, 0.7, 0.9, 1)
+
+[node name="HSeparator" type="HSeparator" parent="HUD/InfoPanel/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="EnterButton" type="Button" parent="HUD/InfoPanel/MarginContainer/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 36)
+text = "Iniciar"
+theme_override_font_sizes/font_size = 15

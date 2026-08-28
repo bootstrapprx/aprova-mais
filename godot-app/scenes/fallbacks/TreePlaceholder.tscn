@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://placeholder_tree"]
+
+[node name="TreePlaceholder" type="Node3D"]
+
+[node name="Trunk" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_trunk")
+
+[node name="Canopy" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mesh = SubResource("SphereMesh_canopy")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_trunk"]
+top_radius = 0.1
+bottom_radius = 0.15
+height = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_canopy"]
+radius = 1.2
+height = 2.0

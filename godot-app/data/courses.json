@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "title": "INSS 2026",
     "imageSrc": "/br.svg",
     "banca": "CESPE",
@@ -8,27 +9,37 @@
     "description": "Curso completo para o concurso do INSS 2026",
     "units": [
       {
+        "id": 1,
         "title": "Língua Portuguesa",
         "description": "Interpretação de textos, gramática, ortografia e sintaxe",
+        "order": 1,
         "lessons": [
           {
+            "id": 1,
             "title": "Compreensão e Interpretação de Textos",
+            "order": 1,
             "challenges": [
               {
+                "id": 1,
                 "type": "SELECT",
                 "question": "Assinale a alternativa que apresenta uma estratégia adequada para identificar a ideia principal de um texto:",
+                "textoApoio": null,
+                "order": 1,
                 "options": [
-                  { "text": "Localizar a frase que resume o conteúdo do texto", "correct": true },
-                  { "text": "Contar o número de palavras do texto", "correct": false },
-                  { "text": "Ignorar os conectivos", "correct": false }
+                  { "id": 1, "text": "Localizar a frase que resume o conteúdo do texto", "correct": true },
+                  { "id": 2, "text": "Contar o número de palavras do texto", "correct": false },
+                  { "id": 3, "text": "Ignorar os conectivos", "correct": false }
                 ]
               },
               {
+                "id": 2,
                 "type": "TRUE_FALSE",
                 "question": "A intertextualidade ocorre quando um texto faz referência a outro texto, seja de forma explícita ou implícita.",
+                "textoApoio": null,
+                "order": 2,
                 "options": [
-                  { "text": "Verdadeiro", "correct": true },
-                  { "text": "Falso", "correct": false }
+                  { "id": 4, "text": "Verdadeiro", "correct": true },
+                  { "id": 5, "text": "Falso", "correct": false }
                 ]
               }
             ]
@@ -36,18 +47,25 @@
         ]
       },
       {
+        "id": 2,
         "title": "Raciocínio Lógico",
-        "description": "Estruturas lógicas",
+        "description": "Estruturas lógicas, sequências, raciocínio dedutivo e indutivo",
+        "order": 2,
         "lessons": [
           {
+            "id": 2,
             "title": "Estruturas Lógicas",
+            "order": 1,
             "challenges": [
               {
+                "id": 3,
                 "type": "SELECT",
                 "question": "Se todos os A são B e nenhum B é C, então pode-se concluir que:",
+                "textoApoio": null,
+                "order": 1,
                 "options": [
-                  { "text": "Nenhum A é C", "correct": true },
-                  { "text": "Todo C é A", "correct": false }
+                  { "id": 6, "text": "Nenhum A é C", "correct": true },
+                  { "id": 7, "text": "Todo C é A", "correct": false }
                 ]
               }
             ]

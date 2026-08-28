@@ -1,0 +1,240 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/challenge_controller.gd" id="1_ctrl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.15, 0.2, 0.35, 1)
+sky_horizon_color = Color(0.3, 0.35, 0.5, 1)
+ground_bottom_color = Color(0.1, 0.08, 0.06, 1)
+ground_horizon_color = Color(0.25, 0.28, 0.3, 1)
+
+[sub_resource type="Sky" id="Sky_room"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_room"]
+background_mode = 2
+sky = SubResource("Sky_room")
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.6, 0.65, 1)
+ambient_light_energy = 0.4
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.2, 0.25, 0.35, 1)
+fog_density = 0.05
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+size = Vector2(6, 6)
+
+[sub_resource type="StandardMaterial3D" id="Material_floor"]
+albedo_color = Color(0.35, 0.32, 0.3, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Material_wall"]
+albedo_color = Color(0.55, 0.53, 0.5, 1)
+roughness = 0.9
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_screen"]
+size = Vector2(4, 2)
+
+[sub_resource type="StandardMaterial3D" id="Material_screen"]
+albedo_color = Color(0.12, 0.14, 0.2, 1)
+emission_enabled = true
+emission = Color(0.15, 0.2, 0.35, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="StandardMaterial3D" id="Material_option"]
+albedo_color = Color(0.2, 0.4, 0.7, 1)
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.05, 0.1, 0.2, 1)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_option"]
+size = Vector3(1.2, 0.6, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_platform"]
+size = Vector3(1.2, 0.15, 0.6)
+
+[node name="ChallengeRoom" type="Node3D"]
+script = ExtResource("1_ctrl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_room")
+
+[node name="CeilingLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8, 1)
+light_energy = 0.8
+omni_range = 8.0
+omni_attenuation = 1.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.94, 0.34, 0, -0.34, 0.94, 0, 3, 6)
+fov = 55.0
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_floor")
+material_override = SubResource("Material_floor")
+
+[node name="WallBack" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3)
+mesh = SubResource("PlaneMesh_screen")
+material_override = SubResource("Material_wall")
+
+[node name="WallLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -3, 2, 0)
+mesh = SubResource("PlaneMesh_screen")
+material_override = SubResource("Material_wall")
+
+[node name="WallRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 3, 2, 0)
+mesh = SubResource("PlaneMesh_screen")
+material_override = SubResource("Material_wall")
+
+[node name="ScreenFrame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -2.95)
+mesh = SubResource("PlaneMesh_screen")
+material_override = SubResource("Material_screen")
+
+[node name="ScreenLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -2.9)
+text = "Enunciado da questão..."
+font_size = 28
+width = 3.8
+autowrap_mode = 2
+modulate = Color(0.9, 0.92, 0.95, 1)
+
+[node name="SupportTextLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 1.5, 0)
+text = ""
+font_size = 16
+width = 2.5
+autowrap_mode = 1
+modulate = Color(0.8, 0.82, 0.85, 1)
+
+[node name="OptionsContainer" type="Node3D" parent="."]
+
+[node name="Option1" type="Node3D" parent="OptionsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.4, 1.5)
+
+[node name="Platform" type="MeshInstance3D" parent="OptionsContainer/Option1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_platform")
+material_override = SubResource("Material_option")
+
+[node name="Label" type="Label3D" parent="OptionsContainer/Option1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+text = "Alternativa 1"
+font_size = 22
+width = 1.1
+autowrap_mode = 2
+
+[node name="Area3D" type="Area3D" parent="OptionsContainer/Option1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OptionsContainer/Option1/Area3D"]
+shape = SubResource("BoxShape3D_option")
+
+[node name="Option2" type="Node3D" parent="OptionsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.4, 1.5)
+
+[node name="Platform" type="MeshInstance3D" parent="OptionsContainer/Option2"]
+mesh = SubResource("BoxMesh_platform")
+material_override = SubResource("Material_option")
+
+[node name="Label" type="Label3D" parent="OptionsContainer/Option2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+text = "Alternativa 2"
+font_size = 22
+width = 1.1
+autowrap_mode = 2
+
+[node name="Area3D" type="Area3D" parent="OptionsContainer/Option2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OptionsContainer/Option2/Area3D"]
+shape = SubResource("BoxShape3D_option")
+
+[node name="Option3" type="Node3D" parent="OptionsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.4, 3)
+
+[node name="Platform" type="MeshInstance3D" parent="OptionsContainer/Option3"]
+mesh = SubResource("BoxMesh_platform")
+material_override = SubResource("Material_option")
+
+[node name="Label" type="Label3D" parent="OptionsContainer/Option3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+text = "Alternativa 3"
+font_size = 22
+width = 1.1
+autowrap_mode = 2
+
+[node name="Area3D" type="Area3D" parent="OptionsContainer/Option3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OptionsContainer/Option3/Area3D"]
+shape = SubResource("BoxShape3D_option")
+
+[node name="Option4" type="Node3D" parent="OptionsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.4, 3)
+
+[node name="Platform" type="MeshInstance3D" parent="OptionsContainer/Option4"]
+mesh = SubResource("BoxMesh_platform")
+material_override = SubResource("Material_option")
+
+[node name="Label" type="Label3D" parent="OptionsContainer/Option4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+text = "Alternativa 4"
+font_size = 22
+width = 1.1
+autowrap_mode = 2
+
+[node name="Area3D" type="Area3D" parent="OptionsContainer/Option4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OptionsContainer/Option4/Area3D"]
+shape = SubResource("BoxShape3D_option")
+
+[node name="FeedbackParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 30
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.9
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TopBar" type="HBoxContainer" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "1 / 10"
+theme_override_font_sizes/font_size = 16
+
+[node name="XPLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "XP: 0"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.9, 0.7, 0.1, 1)
+
+[node name="LevelLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "Nível 1"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.3, 0.6, 0.9, 1)
+
+[node name="FeedbackLabel" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -25.0
+offset_right = 150.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = ""
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28

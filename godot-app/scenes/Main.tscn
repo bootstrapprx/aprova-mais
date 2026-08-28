@@ -1,69 +1,183 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6xkqq87t2dxe"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/Main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
 
-[node name="Main" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.35, 0.55, 0.85, 1)
+sky_horizon_color = Color(0.65, 0.75, 0.85, 1)
+ground_bottom_color = Color(0.2, 0.17, 0.13, 1)
+ground_horizon_color = Color(0.55, 0.6, 0.55, 1)
+
+[sub_resource type="Sky" id="Sky_main"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+sky = SubResource("Sky_main")
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+ssao_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.7, 0.75, 0.85, 1)
+fog_density = 0.01
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(40, 40)
+
+[sub_resource type="StandardMaterial3D" id="MaterialGrass"]
+albedo_color = Color(0.35, 0.6, 0.25, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_marker1"]
+size = Vector3(1, 1.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="MaterialMarker"]
+albedo_color = Color(0.9, 0.3, 0.2, 1)
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_marker2"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="MaterialMarker2"]
+albedo_color = Color(0.2, 0.5, 0.9, 1)
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_marker3"]
+size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="MaterialMarker3"]
+albedo_color = Color(0.2, 0.8, 0.3, 1)
+roughness = 0.6
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ground")
+material_override = SubResource("MaterialGrass")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 8, 12)
+fov = 60.0
+
+[node name="MarkerPOI1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.75, -3)
+mesh = SubResource("BoxMesh_marker1")
+material_override = SubResource("MaterialMarker")
+
+[node name="MarkerPOI2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
+mesh = SubResource("BoxMesh_marker2")
+material_override = SubResource("MaterialMarker2")
+
+[node name="MarkerPOI3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.6, -2)
+mesh = SubResource("BoxMesh_marker3")
+material_override = SubResource("MaterialMarker3")
+
+[node name="MenuUI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="MenuUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -250.0
+offset_right = 180.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_main")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.95, 0.96, 0.98, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 40.0
-offset_right = -20.0
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="ProgressLabel" type="Label" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuUI/Panel"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
-theme_override_font_sizes/font_size = 18
-text = "Lesson 1 / 10"
-horizontal_alignment = 1
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="QuestionLabel" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuUI/Panel/MarginContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 24
-text = "Question goes here..."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="OptionsContainer" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "APROVA+"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 32
+
+[node name="SubtitleLabel" type="Label" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Selecione um curso:"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="TopBar" type="HBoxContainer" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="FeedbackLabel" type="Label" parent="VBoxContainer"]
+[node name="XPLabel" type="Label" parent="MenuUI/Panel/MarginContainer/VBoxContainer/TopBar"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.6, 0.2, 1)
-theme_override_font_sizes/font_size = 20
+text = "XP: 0"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.8, 0.6, 0.1, 1)
+
+[node name="LevelLabel" type="Label" parent="MenuUI/Panel/MarginContainer/VBoxContainer/TopBar"]
+layout_mode = 2
+text = "Nível 1"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.3, 0.6, 0.9, 1)
+
+[node name="HSeparator" type="HSeparator" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 300)
+
+[node name="CourseList" type="VBoxContainer" parent="MenuUI/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="StartButton" type="Button" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 45)
+disabled = true
+text = "Selecionar um curso"
+theme_override_font_sizes/font_size = 18
+
+[node name="WorldButton" type="Button" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+text = "Abrir Mundo 3D"
+theme_override_font_sizes/font_size = 16
+
+[node name="GraphButton" type="Button" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+text = "Grafo de Conceitos"
+theme_override_font_sizes/font_size = 16
+
+[node name="HSeparator2" type="HSeparator" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VersionLabel" type="Label" parent="MenuUI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "v19.0.1.0.0"
 horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="NextButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Continuar"
-
-[connection signal="pressed" from="VBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
